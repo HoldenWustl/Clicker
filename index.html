@@ -32,16 +32,18 @@
 
     // Increment the counter when the button is clicked
     document.getElementById('incrementButton').addEventListener('click', () => {
-      clickCountRef.transaction((currentValue) => {
-        return (currentValue || 0) + 1;  // Increment the current value
-      });
-    });
+  clickCountRef.transaction((currentValue) => {
+    console.log("Current value before increment:", currentValue);  // Debugging log
+    return (currentValue || 0) + 1;  // Increment the current value
+  });
+});
 
-    // Listen for updates to the click count in Firebase and update the UI
-    clickCountRef.on('value', (snapshot) => {
-      const clickCount = snapshot.val() || 0;
-      document.getElementById('clickCount').innerText = clickCount;
-    });
+clickCountRef.on('value', (snapshot) => {
+  const clickCount = snapshot.val() || 0;
+  console.log("Updated click count:", clickCount);  // Debugging log
+  document.getElementById('clickCount').innerText = clickCount;
+});
+
   </script>
 </body>
 </html>
